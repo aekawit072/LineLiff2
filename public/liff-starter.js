@@ -1,3 +1,12 @@
+var GET = {};
+var query = window.location.search.substring(1).split("&");
+for (var i = 0, max = query.length; i < max; i++) {
+if (query[i] === "") // check for trailing & with no param
+  continue;
+  var param = query[i].split("=");
+  GET[decodeURIComponent(param[0])] = decodeURIComponent(param[1] || "");
+}
+
 window.onload = function() {
     const useNodeJS = true;   // if you are not using a node server, set this value to false
     const defaultLiffId = "";   // change the default LIFF value if you are not using a node server
@@ -121,13 +130,19 @@ function registerButtonHandlers() {
 
     // sendMessages call
     document.getElementById('sendMessageButton').addEventListener('click', function() {
+        var altText = GET.altText;
+        var FlexImage = GET.FlexImage;
+        var FlexHeader = GET.FlexHeader;
+        var FlexText = GET.FlexText;
+        var FlexLabel = GET.FlexLabel;
+        var FlexLink = GET.FlexLink;
+        var cContents = Box_ImageCenter(FlexHeader, FlexImage, FlexText, FlexLabel, FlexLink, 'md', 'xl');
         if (!liff.isInClient()) {
             sendAlertIfNotInClient();
         } else {
-            liff.sendMessages([{
-                'type': 'text',
-                'text': "You've successfully sent a message! Hooray!"
-            }]).then(function() {
+            liff.sendMessages([
+                cContents
+            ]).then(function() {
                 window.alert('Message sent');
             }).catch(function(error) {
                 window.alert('Error sending message: ' + error);
@@ -240,4 +255,62 @@ function toggleElement(elementId) {
     } else {
         elem.style.display = 'block';
     }
+}
+
+function Box_ImageCenter(altText, FlexHeader, FlexImage, FlexText, FlexLabel, FlexLink, HeaderSize, BodySize) {
+    return {
+        "type": "flex",
+        "altText": altText,
+        "contents": {
+            "type": "bubble",
+            "header": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [{
+                        "type": "text",
+                        "text": FlexHeader,
+                        "weight": "bold",
+                        "color": "#0061ff",
+                        "wrap": true,
+                        "size": "xl",
+                        "align": "center"
+                    }
+                ]
+            },
+            "hero": {
+                "type": "image",
+                "url": FlexImage,
+                "size": "full",
+                "aspectRatio": "4:3"
+            },
+            "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [{
+                        "type": "text",
+                        "text": FlexText,
+                        "size": "xl",
+                        "color": "#1A4876",
+                        "wrap": true
+                    }
+                ]
+            },
+            "footer": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [{
+                        "type": "button",
+                        "margin": "xl",
+                        "height": "sm",
+                        "action": {
+                            "type": "uri",
+                            "label": FlexLabel,
+                            "uri": FlexLink
+                        },
+                        "style": "primary"
+                    }
+                ]
+            }
+        }
+    };
 }
