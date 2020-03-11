@@ -7,20 +7,41 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
+					<form>
+						<div class="form-group">
+							<label>ข้อความนำ:</label>
+							<input class="form-control" id="altText" type="text" value="Happy Birth Day" />
+						</div>
+						<div class="form-group">
+							<label>ใส่หัวเรื่อง:</label>
+							<input class="form-control" id="FlexHeader" type="text" value="สุขสันต์วันเกิด" />
+						</div>
+						<div class="form-group">
+							<label>ใส่ Link รูปภาพ:</label>
+							<input class="form-control" id="FlexImage" type="text" value="https://1.bp.blogspot.com/-z_WAuJyPG1Q/XafMH2etImI/AAAAAAACAOk/f34BSvYtNhUOIh0jtcT8GwfxTgUb35TkgCNcBGAsYHQ/s1600/00.gif" />
+						</div>
+						<div class="form-group">
+							<label>ใส่ข้อความ:</label>
+							<textarea class="form-control" id="FlexText" style="height: 250px;">ขอพรชัย ฝากส่งไป ผ่านฟากฟ้า
+อวยพรมา ให้สุขสันต์ เกษมศรี
+ขอให้ห่าง ทุกข์โศก โรคไม่มี
+ให้ชีวี ประสบสุข ทุกคืนวัน</textarea>
+						</div>
+						<div class="form-group">
+							<label>ใส่ป้ายกำกับ Link:</label>
+							<input class="form-control" id="FlexLabel" type="text" value="เพลงวันเกิด" />
+						</div>
+						<div class="form-group">
+							<label>Link:</label>
+							<input class="form-control" id="FlexLink" type="text" value="https://www.youtube.com/watch?v=IyAVVaaLQ6I&amp;list=PLVsWcRbIoZy6YR8CahzN1tG_20yIlZ9gb" />
+						</div>
+					</form>
+
         <div id="liffAppContent">
             <!-- ACTION BUTTONS -->
             <div class="buttonGroup">
                 <div class="buttonRow">
-                    <button id="openWindowButton">Open External Window</button>
-                    <button id="closeWindowButton">Close LIFF App</button>
-                </div>
-                <div class="buttonRow">
-                    <button id="scanQrCodeButton">Open QR Code Reader</button>
-                    <button id="sendMessageButton">Send Message</button>
-                </div>
-                <div class="buttonRow">
-                    <button id="getAccessToken">Get Access Token</button>
-                    <button id="getProfileButton">Get Profile</button>
+                    <button id="sendmessagebutton">ส่งข้อความ Flex</button>
                 </div>
             </div>
             <!-- ACCESS TOKEN DATA -->
